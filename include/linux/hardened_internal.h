@@ -1,8 +1,6 @@
 #ifndef __HARDENED_INTERNAL_H
 #define __HARDENED_INTERNAL_H
 
-#ifdef CONFIG_HARDENED
-
 #include <linux/fs.h>
 #include <linux/mnt_namespace.h>
 #include <linux/nsproxy.h>
@@ -72,8 +70,5 @@ static inline bool is_same_file(const struct file *file1, const struct file *fil
 	CAP_TO_MASK(CAP_NET_RAW) | CAP_TO_MASK(CAP_SYS_TTY_CONFIG) | \
 	CAP_TO_MASK(CAP_IPC_OWNER) | CAP_TO_MASK(CAP_SETFCAP), \
 	CAP_TO_MASK(CAP_SYSLOG) | CAP_TO_MASK(CAP_MAC_ADMIN) }}
-
-
-#endif
 
 #endif
