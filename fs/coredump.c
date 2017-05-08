@@ -39,6 +39,7 @@
 #include <linux/fs.h>
 #include <linux/path.h>
 #include <linux/timekeeping.h>
+#include <linux/hardened.h>
 
 #include <linux/uaccess.h>
 #include <asm/mmu_context.h>
@@ -776,7 +777,8 @@ fail_unlock:
 fail_creds:
 	put_cred(cred);
 fail:
-	if (signr == SIGSEGV || signr == SIGBUS || signr == SIGKILL || signr == SIGILL)
+	if (siginfo->si_signo == SIGSEGV || siginfo->si_signo == SIGBUS || 
+			siginfo->si_signo == SIGKILL || siginfo->si_signo == SIGILL)
                 handle_brute_attach(dumpable);
 	return;
 }
