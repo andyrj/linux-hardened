@@ -560,7 +560,6 @@ static ssize_t proc_sys_call_handler(struct file *filp, void __user *buf,
 	struct inode *inode = file_inode(filp);
 	struct ctl_table_header *head = grab_header(inode);
 	struct ctl_table *table = PROC_I(inode)->sysctl_entry;
-	int op = write ? MAY_WRITE : MAY_READ;
 	ssize_t error;
 	size_t res;
 
@@ -582,16 +581,16 @@ static ssize_t proc_sys_call_handler(struct file *filp, void __user *buf,
 
 #ifdef CONFIG_HARDENED
         error = -EPERM;
-        if (handle_chroot_sysctl(op))
+        if (handle_chroot_sysctl(write ? MAY_WRITE : MAY_READ))
                 goto out;
 	/* NOTE: review code below to see if more of this would be useful for security other than acl
         dget(filp->f_path.dentry);
-        if (gr_handle_sysctl_mod((const char *)filp->f_path.dentry->d_parent->d_name.name, table->procname, op)) {
+        if (gr_handle_sysctl_mod((const char *)filp->f_path.dentry->d_parent->d_name.name, table->procname, write ? MAY_WRITE : MAY_READ)) {
                 dput(filp->f_path.dentry);
                 goto out;
         }   
         dput(filp->f_path.dentry);
-        if (!gr_acl_handle_open(filp->f_path.dentry, filp->f_path.mnt, op))
+        if (!gr_acl_handle_open(filp->f_path.dentry, filp->f_path.mnt, write ? MAY_WRITE : MAY_READ))
                 goto out;
         if (write) {
                 if (current->nsproxy->net_ns != table->extra2) {
