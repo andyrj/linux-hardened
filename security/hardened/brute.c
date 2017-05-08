@@ -35,7 +35,6 @@ gr_log_signal(const int sig, const void *addr, const struct task_struct *t)
 }
 */
 
-#ifdef CONFIG_HARDENED
 extern int specific_send_sig_info(int sig, struct siginfo *info, struct task_struct *t);
 
 int fake_force_sig(int sig, struct task_struct *t)
@@ -63,7 +62,6 @@ int fake_force_sig(int sig, struct task_struct *t)
 
 	return ret;
 }
-#endif
 
 #define USER_BAN_TIME (15 * 60)
 #define DAEMON_BRUTE_TIME (30 * 60)

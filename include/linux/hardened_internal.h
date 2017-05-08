@@ -1,8 +1,6 @@
 #ifndef __HARDENED_INTERNAL_H
 #define __HARDENED_INTERNAL_H
 
-#ifdef CONFIG_HARDENED
-
 #include <linux/fs.h>
 #include <linux/mnt_namespace.h>
 #include <linux/nsproxy.h>
@@ -52,7 +50,5 @@ static inline bool is_same_file(const struct file *file1, const struct file *fil
 
 	return false;
 }
-
-#endif
 
 #endif
