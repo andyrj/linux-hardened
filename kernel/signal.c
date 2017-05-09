@@ -721,7 +721,7 @@ static int kill_ok_by_cred(struct task_struct *t)
 int
 handle_signal(const struct task_struct *p, const int sig)
 {
-#ifdef CONFIG_HARDENED
+#ifdef CONFIG_HARDENED_CHROOT
 	// NOTE: need to review gr_check_protected_task to see if it should be extracted
         /* ignore the 0 signal for protected task checks */
         /*if (task_pid_nr(current) > 1 && sig && gr_check_protected_task(p)) {

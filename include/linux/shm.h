@@ -23,7 +23,7 @@ struct shmid_kernel /* private to the kernel */
 	struct task_struct	*shm_creator;
 	struct list_head	shm_clist;	/* list by creator */
 
-#ifdef CONFIG_HARDENED
+#ifdef CONFIG_HARDENED_CHROOT
         u64                     shm_createtime;
         pid_t                   shm_lapid;
 #endif
