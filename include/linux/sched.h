@@ -1046,6 +1046,9 @@ struct task_struct {
 	unsigned long brute_expires;
 	u8 brute;
 
+	struct dentry *chroot_dentry;
+	u8 is_chrooted;
+	
 	/* CPU-specific state of this task: */
 	struct thread_struct		thread;
 
@@ -1388,6 +1391,7 @@ static inline struct thread_info *task_thread_info(struct task_struct *task)
  */
 
 extern struct task_struct *find_task_by_vpid(pid_t nr);
+extern struct task_struct *find_task_by_vpid_unrestricted(pid_t nr);
 extern struct task_struct *find_task_by_pid_ns(pid_t nr, struct pid_namespace *ns);
 
 extern int wake_up_state(struct task_struct *tsk, unsigned int state);
