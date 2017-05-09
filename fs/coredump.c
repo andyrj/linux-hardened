@@ -779,7 +779,7 @@ fail_creds:
 fail:
 	if (siginfo->si_signo == SIGSEGV || siginfo->si_signo == SIGBUS || 
 			siginfo->si_signo == SIGKILL || siginfo->si_signo == SIGILL)
-                handle_brute_attach(dumpable);
+                handle_brute_attach(__get_dumpable(cprm.mm_flags));
 	return;
 }
 
