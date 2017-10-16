@@ -1814,10 +1814,10 @@ static int do_execveat_common(int fd, struct filename *filename,
 	return retval;
 
 out_fail:
-#ifdef CONFIG_HARDENED_BRUTE
-	fput(current->exec_file);
-	current->exec_file = old_exec_file;
-#endif
+//#ifdef CONFIG_HARDENED_BRUTE
+//	fput(current->exec_file);
+//	current->exec_file = old_exec_file;
+//#endif
 
 out:
 	if (bprm->mm) {
